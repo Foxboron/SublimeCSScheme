@@ -1,5 +1,6 @@
 import cssutils
 import plistlib
+import logging
 
 
 def css2plist(css):
@@ -29,13 +30,14 @@ def css2plist(css):
 
 def plist2css(xml):
     a = plistlib.readPlistFromString(xml)
+    cssutils.log.setLevel(logging.FATAL)
     sheet = cssutils.css.CSSStyleSheet(validating=None)
 
     #info
     info = "info {name: %s; uuid: %s}"
     name = a['name']
     uuid = a['uuid']
-    sheet.add(info % (name, uuid))
+    cssadd(sheet, info % (name, uuid))
 
     #settings
     l = []
@@ -44,7 +46,7 @@ def plist2css(xml):
         l.append(st)
     p = ''.join(l)
     setting = "settings {%s}" % p
-    sheet.add(setting)
+    cssadd(sheet, setting)
 
     for i in a['settings']:
         if len(i.keys()) != 1:
@@ -55,5 +57,18 @@ def plist2css(xml):
                 ss.append(s)
             css_defs = ''.join(ss)
             together = "%s {%s}" % (title, css_defs)
-            sheet.add(together)
+            cssadd(sheet, together)
     return sheet.cssText
+
+
+def cssadd(sheet, rule):
+    try:
+        sheet.add(rule)
+    except Exception, e:
+        if "Unexpected CHAR" in e:
+            print "You got a invalid letter!"
+        elif "Unknown syntax or no value" in e:
+            print "Empty tag in the XML!"
+        elif "Unexpected NUMBER" in e or "No match in Choice" in e:
+            print "Print wrong HEX value"
+        raise "Error bro."
