@@ -1,6 +1,8 @@
-import sublime, sublime_plugin
+import sublime
+import sublime_plugin
 import src.lib.converters
 #css2plist, plist2css
+
 
 class CssXmlCommand(sublime_plugin.TextCommand, sublime.View):
     def run(self, edit):
@@ -10,7 +12,6 @@ class CssXmlCommand(sublime_plugin.TextCommand, sublime.View):
         self.view.replace(edit, sublime.Region(0, self.view.size()), l)
         self.view.end_edit(edit)
 
-        
 
 class XmlCssCommand(sublime_plugin.TextCommand, sublime.View):
     def run(self, edit):
@@ -19,5 +20,3 @@ class XmlCssCommand(sublime_plugin.TextCommand, sublime.View):
         edit = self.view.begin_edit()
         self.view.replace(edit, sublime.Region(0, self.view.size()), l)
         self.view.end_edit(edit)
-
-
