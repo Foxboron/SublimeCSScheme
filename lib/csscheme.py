@@ -259,8 +259,10 @@ class CSSchemeParser(CSS21Parser):
 
         # allowed properties in their respective scope
         if context == '@settings':
-            allowed_properties = ('background', 'caret', 'foreground',
-                                  'invisibles', 'linehighlight', 'selection')
+            allowed_properties = ('background', 'caret', 'foreground', 'invisibles',
+                                  'lineHighlight', 'selection', 'findHighlight',
+                                  'inactiveSelection', 'gutterForeground', 'guide',
+                                  'activeGuide')
         else:
             allowed_properties = ('foreground', 'background', 'fontStyle')
         if property_name not in allowed_properties:
