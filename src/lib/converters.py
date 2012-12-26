@@ -29,7 +29,6 @@ def css2plist(css):
 
 def plist2css(xml):
     a = plistlib.readPlistFromString(xml)
-    cssutils.log.setLevel(logging.FATAL)
     sheet = cssutils.css.CSSStyleSheet(validating=None)
 
     #info

@@ -1,0 +1,9 @@
+[
+    {   "caption": "CSScheme: Build too XML",
+        "command": "css_xml"
+    },
+    {
+        "caption": "CSScheme: Build too CSS",
+        "command": "xml_css"
+    }
+]
