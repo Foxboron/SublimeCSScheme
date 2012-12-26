@@ -63,7 +63,7 @@ def plist2css(xml):
 
 def cssadd(sheet, rule):
     try:
-        sheet.add(rule)
+        sheet.add(rule+"\n")
     except Exception, e:
         if "Unexpected CHAR" in e:
             print "You got a invalid letter!"
